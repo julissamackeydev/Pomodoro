@@ -1,0 +1,19 @@
+{
+  "name": "pomodoro",
+  "version": "1.0.0",
+  "description": "a cute timer app written in the MEAN stack",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/julissamackeydev/Pomodoro.git"
+  },
+  "author": "Julissa Mackey",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/julissamackeydev/Pomodoro/issues"
+  },
+  "homepage": "https://github.com/julissamackeydev/Pomodoro#readme"
+}
