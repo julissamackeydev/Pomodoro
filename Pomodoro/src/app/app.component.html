@@ -49,9 +49,14 @@
   
   <!-- timer   -->
   <div class="row" [ngClass]="timerRunning === true ? '' : 'hidden'">
-    <h1 class="col s6">{{minutes}}</h1><h1 class="col s6">{{seconds}}</h1> 
+    <h1>{{timeLeft}}</h1>
   </div>
     
+  <!-- progress bar   -->
+  <div class="white progress slow" [ngClass]="timerRunning === true ? '' : 'hidden'">
+      <div class="red indeterminate"></div>
+  </div>
+  
   <!-- pomodoro / start button   -->
   <h1>
     <a 
@@ -63,11 +68,6 @@
     >{{title}}</a>
   </h1>
 
-  <!-- progress bar   -->
-  <div class="white progress slow" [ngClass]="timerRunning === true ? '' : 'hidden'">
-      <div class="red indeterminate"></div>
-  </div>
-  
- </div> 
+</div> 
 
 <router-outlet></router-outlet>

@@ -10,8 +10,9 @@ export class AppComponent implements OnInit{
   title: string = 'pomodoro';
   timerRunning: boolean = false;
   displayTimer: boolean = true;
-  minutes:number;
-  seconds: number;
+  timeLeft:number;
+  displayTimeLeft: number;
+  interval;
 
   ngOnInit(){
     M.AutoInit();
@@ -28,17 +29,35 @@ export class AppComponent implements OnInit{
     // }, 2000);
   }
 
-  startTimer(){
 
+  startTimer() {
     setTimeout(()=>{
       this.timerRunning = true;
     },1000);
-
-    setTimeout(()=>{
-      this.endTimer();
-    },1000);
-
+    this.interval = setInterval(() => {
+      if(this.timeLeft > 0) {
+        this.timeLeft--;
+      } else {
+        this.timeLeft = 60;
+      }
+    },1000)
   }
+
+  pauseTimer() {
+    clearInterval(this.interval);
+  }
+
+  // startTimer(){
+
+  //   setTimeout(()=>{
+  //     this.timerRunning = true;
+  //   },1000);
+
+  //   setTimeout(()=>{
+  //     this.endTimer();
+  //   },1000);
+
+  // }
 
   endTimer(){
 
@@ -51,43 +70,34 @@ export class AppComponent implements OnInit{
   setTime(time:number){
 
     if (time === 5){
-      // this.minutes = Math.floor((300000/1000/60)<< 0); 
-      this.minutes = this.millisecondConverter(300000).minutes;
-      // this.seconds = this.millisecondConverter(30000).seconds;
+      this.timeLeft = 300000;
+      this.displayTimeLeft = this.millisecondConverter(300000);
     }
 
     if (time === 10){
-      this.minutes = 600000;
+      this.timeLeft = this.millisecondConverter(600000);
     }
 
     if (time === 15) {
-      this.minutes = 900000;
+      this.timeLeft = this.millisecondConverter(900000);
     }
 
     if (time === 20){
-      this.minutes = 1.2e+6;
+      this.timeLeft = this.millisecondConverter(1.2e+6);
     }
 
     if (time === 25){
-      this.minutes = 1.5e+6;
+      this.timeLeft = this.millisecondConverter(1.5e+6);
     }
 
     if (time === 30){
-      this.minutes = 1.8e+6;
+      this.timeLeft = this.millisecondConverter(1.8e+6);
     }
 
   }
 
   millisecondConverter(ms){
-    const minutes = Math.floor(ms / 60000);
-    const seconds = ((ms % 60000) / 1000);
-    // .toFixed(0);
-
-    return {
-      minutes: minutes,
-      seconds: seconds
-    };
-
+    return Math.floor(ms / 60000);
   }
   toggleTimerDisplay(display:boolean){
     if(this.displayTimer === false){
