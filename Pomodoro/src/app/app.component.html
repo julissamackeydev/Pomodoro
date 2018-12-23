@@ -1,20 +1,41 @@
-<!--The content below is only a placeholder and can be replaced.-->
 <div class="row"></div>
-<div class="row">  
 
+<div class="row">  
+<!-- settings -->
   <a class="col s1 offset-s10 dropdown-trigger btn-flat"  data-target='settings'><i class=" material-icons grey-text lighten-1">settings</i></a>
 
   <ul id='settings' class='dropdown-content'>
+    
+    <li [ngClass]="displayTimer === true ? 'hidden' : ''">
+      
+      <a 
+      (click)="toggleTimerDisplay(true)"
+      class="grey-text" href="#!">display timer</a>
+    
+    </li>
+    
+    <li [ngClass]="displayTimer === true ? '' : 'hidden'">
+    
+      <a 
+      (click)="toggleTimerDisplay(off)"
+      class="grey-text" href="#!">hide timer</a>
+    
+    </li>
+    
+    <li class="divider"></li>  
+    
     <li><a class="grey-text"href="#!" (click)="setTime(5)">5 min</a></li>
-    <li><a class="grey-text" href="#!">10 min</a></li>
-    <li><a class="grey-text" href="#!">15 min</a></li>
-    <li><a class="grey-text" href="#!">20 min</a></li>
-    <li><a class="grey-text" href="#!">25 min</a></li>
-    <li><a class="grey-text" href="#!">30 min</a></li>
+    <li><a class="grey-text" href="#!" (click)="setTime(10)">10 min</a></li>
+    <li><a class="grey-text" href="#!" (click)="setTime(15)">15 min</a></li>
+    <li><a class="grey-text" href="#!" (click)="setTime(20)">20 min</a></li>
+    <li><a class="grey-text" href="#!" (click)="setTime(25)">25 min</a></li>
+    <li><a class="grey-text" href="#!" (click)="setTime(30)">30 min (default)</a></li>  
+  
   </ul>
 
 </div>
 <div class="row divider"></div>
+
 <div class="row"></div>
 <div class="row"></div>
 <div class="row"></div>
@@ -23,16 +44,30 @@
 <div class="row"></div>
 <div class="row"></div>
 
+<!-- main container -->
 <div class="row" style="text-align:center">
-  <h1><a 
+  
+  <!-- timer   -->
+  <div class="row" [ngClass]="timerRunning === true ? '' : 'hidden'">
+    <h1 class="col s6">{{minutes}}</h1><h1 class="col s6">{{seconds}}</h1> 
+  </div>
+    
+  <!-- pomodoro / start button   -->
+  <h1>
+    <a 
     class="btn-flat white tooltipped" 
     data-position="right" 
     data-tooltip="get ready"
     onclick="M.toast({html: 'begin', displayLength: 1000, classes:'grey lighten-1'})"
     (click)="startTimer()"
-    >{{title}}</a></h1>
+    >{{title}}</a>
+  </h1>
 
+  <!-- progress bar   -->
   <div class="white progress slow" [ngClass]="timerRunning === true ? '' : 'hidden'">
       <div class="red indeterminate"></div>
   </div>
+  
+ </div> 
+
 <router-outlet></router-outlet>
