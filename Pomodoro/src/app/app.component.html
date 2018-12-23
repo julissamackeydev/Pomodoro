@@ -1,6 +1,38 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>{{ title }}</h1>
+<div class="row"></div>
+<div class="row">  
 
-  <button (click)="startTimer()">start</button>
+  <a class="col s1 offset-s10 dropdown-trigger btn-flat"  data-target='settings'><i class=" material-icons grey-text lighten-1">settings</i></a>
+
+  <ul id='settings' class='dropdown-content'>
+    <li><a class="grey-text"href="#!" (click)="setTime(5)">5 min</a></li>
+    <li><a class="grey-text" href="#!">10 min</a></li>
+    <li><a class="grey-text" href="#!">15 min</a></li>
+    <li><a class="grey-text" href="#!">20 min</a></li>
+    <li><a class="grey-text" href="#!">25 min</a></li>
+    <li><a class="grey-text" href="#!">30 min</a></li>
+  </ul>
+
+</div>
+<div class="row divider"></div>
+<div class="row"></div>
+<div class="row"></div>
+<div class="row"></div>
+<div class="row"></div>
+<div class="row"></div>
+<div class="row"></div>
+<div class="row"></div>
+
+<div class="row" style="text-align:center">
+  <h1><a 
+    class="btn-flat white tooltipped" 
+    data-position="right" 
+    data-tooltip="get ready"
+    onclick="M.toast({html: 'begin', displayLength: 1000, classes:'grey lighten-1'})"
+    (click)="startTimer()"
+    >{{title}}</a></h1>
+
+  <div class="white progress slow" [ngClass]="timerRunning === true ? '' : 'hidden'">
+      <div class="red indeterminate"></div>
+  </div>
 <router-outlet></router-outlet>
