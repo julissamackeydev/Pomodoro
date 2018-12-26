@@ -24,7 +24,7 @@
     
     <li class="divider"></li>  
     
-    <li><a class="grey-text"href="#!" (click)="setTime(5)">5 min</a></li>
+    <li><a class="grey-text" (click)="setTime(5)">5 min</a></li>
     <li><a class="grey-text" href="#!" (click)="setTime(10)">10 min</a></li>
     <li><a class="grey-text" href="#!" (click)="setTime(15)">15 min</a></li>
     <li><a class="grey-text" href="#!" (click)="setTime(20)">20 min</a></li>
@@ -49,7 +49,7 @@
   
   <!-- timer   -->
   <div class="row" [ngClass]="timerRunning === true ? '' : 'hidden'">
-    <h1>{{timeLeft}}</h1>
+    <h1>{{displayTimeLeft}}:{{seconds}}</h1>
   </div>
     
   <!-- progress bar   -->

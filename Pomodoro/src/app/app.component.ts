@@ -10,35 +10,42 @@ export class AppComponent implements OnInit{
   title: string = 'pomodoro';
   timerRunning: boolean = false;
   displayTimer: boolean = true;
-  timeLeft:number;
-  displayTimeLeft: number;
+  timeLeft: number = 1.8e+6; //default, 30 minutes
+  displayTimeLeft: number = this.millisecondConverter(this.timeLeft)-1;
+  seconds: number = 60;
   interval;
 
   ngOnInit(){
+    console.log('timerRunning', this.timerRunning);
+    console.log('diplayTimer', this.displayTimeLeft);
+    console.log('timeLeft', this.timeLeft);
+    console.log('displayTimeLeft', this.displayTimeLeft);
+
     M.AutoInit();
     const elems = document.querySelectorAll('.dropdown-trigger');
     const instances = M.Dropdown.init(elems, {hover:true, inDuration:500, outDuration:500});
-
-    ///////////////// Maybe this is superfluous... 
-    // const instance = M.Dropdown.getInstance(elems[0]);
-    // setTimeout(()=>{
-    //   instance.open();
-    // },1000);
-    // setTimeout(()=>{
-    //   instance.close();
-    // }, 2000);
   }
 
 
   startTimer() {
-    setTimeout(()=>{
-      this.timerRunning = true;
-    },1000);
+
     this.interval = setInterval(() => {
+      
+      this.timerRunning = true;
+      
       if(this.timeLeft > 0) {
         this.timeLeft--;
-      } else {
+        } 
+        else{
         this.timeLeft = 60;
+      }
+
+      if(this.seconds > 0){
+        this.seconds --;
+      }
+      else{
+        this.displayTimeLeft --;
+        this.seconds = 60;
       }
     },1000)
   }
@@ -68,6 +75,7 @@ export class AppComponent implements OnInit{
   }
 
   setTime(time:number){
+    let seconds:number;
 
     if (time === 5){
       this.timeLeft = 300000;
@@ -75,23 +83,28 @@ export class AppComponent implements OnInit{
     }
 
     if (time === 10){
-      this.timeLeft = this.millisecondConverter(600000);
+      this.timeLeft = 600000;
+      this.displayTimeLeft = this.millisecondConverter(600000);
     }
 
     if (time === 15) {
-      this.timeLeft = this.millisecondConverter(900000);
+      this.timeLeft = 900000;
+      this.displayTimeLeft = this.millisecondConverter(900000);
     }
 
     if (time === 20){
-      this.timeLeft = this.millisecondConverter(1.2e+6);
+      this.timeLeft = 1.2e+6;
+      this.displayTimeLeft = this.millisecondConverter(1.2e+6);
     }
 
     if (time === 25){
-      this.timeLeft = this.millisecondConverter(1.5e+6);
+      this.timeLeft = 1.5e+6;
+      this.displayTimeLeft = this.millisecondConverter(1.5e+6);
     }
 
     if (time === 30){
-      this.timeLeft = this.millisecondConverter(1.8e+6);
+      this.timeLeft = 1.8e+6;
+      this.displayTimeLeft = this.millisecondConverter(1.8e+6);
     }
 
   }
