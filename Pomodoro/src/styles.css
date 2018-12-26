@@ -2,3 +2,6 @@
 .hidden{
     display:none;
 }
+.dark{
+    background-color: rgb(65, 61, 61);
+}

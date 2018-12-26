@@ -1,73 +1,120 @@
-<div class="row"></div>
+<!-- space filler -->
+<div class="app" [ngClass]=" darkMode === true ? 'dark' : ''">
+  <div class="row"></div>
 
-<div class="row">  
-<!-- settings -->
-  <a class="col s1 offset-s10 dropdown-trigger btn-flat"  data-target='settings'><i class=" material-icons grey-text lighten-1">settings</i></a>
+  <!-- settings drop down -->
+  <div class="row">  
+    <a class="col s1 offset-s10 dropdown-trigger btn-flat"  data-target='settings'><i class=" material-icons grey-text lighten-1">settings</i></a>
 
-  <ul id='settings' class='dropdown-content'>
-    
-    <li [ngClass]="displayTimer === true ? 'hidden' : ''">
+    <ul id='settings' class='dropdown-content'>
       
-      <a 
-      (click)="toggleTimerDisplay(true)"
-      class="grey-text" href="#!">display timer</a>
-    
-    </li>
-    
-    <li [ngClass]="displayTimer === true ? '' : 'hidden'">
-    
-      <a 
-      (click)="toggleTimerDisplay(off)"
-      class="grey-text" href="#!">hide timer</a>
-    
-    </li>
-    
-    <li class="divider"></li>  
-    
-    <li><a class="grey-text" (click)="setTime(5)">5 min</a></li>
-    <li><a class="grey-text" href="#!" (click)="setTime(10)">10 min</a></li>
-    <li><a class="grey-text" href="#!" (click)="setTime(15)">15 min</a></li>
-    <li><a class="grey-text" href="#!" (click)="setTime(20)">20 min</a></li>
-    <li><a class="grey-text" href="#!" (click)="setTime(25)">25 min</a></li>
-    <li><a class="grey-text" href="#!" (click)="setTime(30)">30 min (default)</a></li>  
-  
-  </ul>
+      <!-- toggle display timer on-->
+      <li [ngClass]="displayTimer === true ? 'hidden' : ''">
+        
+        <a 
+        (click)="toggleTimerDisplay(true)"
+        class="grey-text">display timer</a>
+      
+      </li>
 
+      <!-- toggle display timer off-->
+      <li [ngClass]="displayTimer === true ? '' : 'hidden'">
+      
+        <a 
+        (click)="toggleTimerDisplay(false)"
+        class="grey-text">hide timer</a>
+      
+      </li>
+      <!-- toggle dark mode -->
+      <li class="divider"></li>
+      <li><a class="grey-text" (click)="toggleDarkMode()">dark mode</a></li>
+
+      <!-- time options -->
+      <li class="divider"></li>  
+      <li><a class="grey-text" (click)="setTime(5)">5 min</a></li>
+      <li><a class="grey-text" href="#!" (click)="setTime(10)">10 min</a></li>
+      <li><a class="grey-text" href="#!" (click)="setTime(15)">15 min</a></li>
+      <li><a class="grey-text" href="#!" (click)="setTime(20)">20 min</a></li>
+      <li><a class="grey-text" href="#!" (click)="setTime(25)">25 min</a></li>
+      <li><a class="grey-text" href="#!" (click)="setTime(30)">30 min (default)</a></li>
+
+    </ul>
+
+  </div>
+
+  <div class="row divider"></div>
+  <!-- space filler -->
+  <div class="row"></div>
+  <div class="row"></div>
+  <div class="row"></div>
+  <div class="row"></div>
+  <div class="row"></div>
+  <div class="row"></div>
+  <div class="row"></div>
+
+  <!-- timer -->
+  <div class="row" style="text-align:center">
+    
+    <!-- timer   -->
+    <div class="row" [ngClass]="displayTimer === false ? 'hidden' : '' || timerRunning === true ? '' : 'hidden'">
+      <h1>{{displayTimeLeft}}:{{seconds}}</h1>
+    </div>
+      
+    <!-- progress bar   -->
+    <div class="white progress slow" [ngClass]="timerRunning === true ? '' : 'hidden'">
+        <div class="red indeterminate"></div>
+    </div>
+    
+    <!-- pomodoro / start button   -->
+    <h1>
+      <a 
+      class="btn-flat white tooltipped red-text" 
+      data-position="right" 
+      data-tooltip="get ready"
+      onclick="M.toast({html: 'begin', displayLength: 1000, classes:'grey lighten-1'})"
+      (click)="startTimer()"
+      >{{title}}</a>
+    </h1>
+
+  </div>
+
+  <!-- space filler -->
+  <div class="row"></div>
+  <div class="row"></div>
+  <div class="row"></div>
+  <div class="row"></div>
+
+  <!-- music -->
+  <div class="row red-text" style="text-align:center">
+      <p class="btn-flat"(click)='showGenres()' [ngClass]="music === true ? 'hidden': ''">how about a little music?</p>
+  </div>
+
+  <!-- select genre -->
+  <div class="row" style="text-align:center" [ngClass]="music === false ? 'hidden' : '' || selected === true ? 'hidden' : ''" >
+      <p class="btn-flat" (click)="playMusic('bossanova')">Bossa Nova</p>
+      <p class="btn-flat" (click)="playMusic('hindustani')">Hindustani Classical</p>
+      <p class="btn-flat" (click)="playMusic('shostakovich')">Shostakovich</p>
+  </div>
+  <!-- switch genre -->
+  <div class="row" style="text-align:center">
+    <p class="btn-flat col s3 offset-s3" [ngClass]="selected != true ? 'hidden' : ''" (click)="returnToMusicOptions()">switch genre</p>
+  </div>
+  <div class="row" style="text-align:center">
+  <!-- bossanova -->
+    <div class="row" style="text-align:center" [ngClass]="genre != 'bossanova' ? 'hidden' : ''">
+        <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/7b4i3a-tPng?" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    <!-- hindustani classical -->
+    <div class="row" style="text-align:center" [ngClass]="genre != 'hindustani' ?'hidden' : ''">
+        <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/SLVf9h2qROU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    <!-- shostakovich -->
+    <div class="row" style="text-align:center" [ngClass]="genre != 'shostakovich' ?'hidden' : ''">
+        <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/LPG_WUgHbis" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+  </div>
+  <router-outlet></router-outlet>
 </div>
-<div class="row divider"></div>
-
-<div class="row"></div>
-<div class="row"></div>
-<div class="row"></div>
-<div class="row"></div>
-<div class="row"></div>
-<div class="row"></div>
-<div class="row"></div>
-
-<!-- main container -->
-<div class="row" style="text-align:center">
-  
-  <!-- timer   -->
-  <div class="row" [ngClass]="timerRunning === true ? '' : 'hidden'">
-    <h1>{{displayTimeLeft}}:{{seconds}}</h1>
-  </div>
-    
-  <!-- progress bar   -->
-  <div class="white progress slow" [ngClass]="timerRunning === true ? '' : 'hidden'">
-      <div class="red indeterminate"></div>
-  </div>
-  
-  <!-- pomodoro / start button   -->
-  <h1>
-    <a 
-    class="btn-flat white tooltipped" 
-    data-position="right" 
-    data-tooltip="get ready"
-    onclick="M.toast({html: 'begin', displayLength: 1000, classes:'grey lighten-1'})"
-    (click)="startTimer()"
-    >{{title}}</a>
-  </h1>
-
-</div> 
-
-<router-outlet></router-outlet>

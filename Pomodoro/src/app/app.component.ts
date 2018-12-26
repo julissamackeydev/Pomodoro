@@ -14,16 +14,22 @@ export class AppComponent implements OnInit{
   displayTimeLeft: number = this.millisecondConverter(this.timeLeft)-1;
   seconds: number = 60;
   interval;
+  toolTipInstance;
+  music: boolean = false;
+  genre: string = '';
+  selected: boolean = false;
+  darkMode:boolean = false;
 
   ngOnInit(){
     console.log('timerRunning', this.timerRunning);
     console.log('diplayTimer', this.displayTimeLeft);
     console.log('timeLeft', this.timeLeft);
     console.log('displayTimeLeft', this.displayTimeLeft);
+    console.log('genre',this.genre);
 
     M.AutoInit();
-    const elems = document.querySelectorAll('.dropdown-trigger');
-    const instances = M.Dropdown.init(elems, {hover:true, inDuration:500, outDuration:500});
+    const dropDown = document.querySelectorAll('.dropdown-trigger');
+    const dropDownInstances = M.Dropdown.init(dropDown, {hover:true, inDuration:500, outDuration:500});
   }
 
 
@@ -35,8 +41,8 @@ export class AppComponent implements OnInit{
       
       if(this.timeLeft > 0) {
         this.timeLeft--;
-        } 
-        else{
+      } 
+      else{
         this.timeLeft = 60;
       }
 
@@ -53,18 +59,6 @@ export class AppComponent implements OnInit{
   pauseTimer() {
     clearInterval(this.interval);
   }
-
-  // startTimer(){
-
-  //   setTimeout(()=>{
-  //     this.timerRunning = true;
-  //   },1000);
-
-  //   setTimeout(()=>{
-  //     this.endTimer();
-  //   },1000);
-
-  // }
 
   endTimer(){
 
@@ -112,12 +106,30 @@ export class AppComponent implements OnInit{
   millisecondConverter(ms){
     return Math.floor(ms / 60000);
   }
+
   toggleTimerDisplay(display:boolean){
-    if(this.displayTimer === false){
-      this.displayTimer = true;
-    }
-    else{
-      this.displayTimer = false
-    };
+    this.displayTimer = display;
+    console.log(this.displayTimer, "display timer")
+    return;
   }
+
+  showGenres(){
+    this.music = true;
+  }
+
+  playMusic(genre:string){
+    console.log(genre);
+    this.selected = true;
+    this.genre = genre;
+    return;
+  }
+  returnToMusicOptions(){
+    this.genre = '';
+    this.selected = false;
+  }
+  // the font is hardly legible 
+  // toggleDarkMode(){
+  //   this.darkMode === false ? this.darkMode = true : this.darkMode = false;
+  //   return
+  // }
 }
