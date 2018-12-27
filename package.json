@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"cd Pomodoro && ng serve"
+    "start": "cd Pomodoro && ng serve"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/julissamackeydev/Pomodoro/issues"
   },
-  "homepage": "https://github.com/julissamackeydev/Pomodoro#readme"
+  "homepage": "https://github.com/julissamackeydev/Pomodoro#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "path": "^0.12.7"
+  }
 }
